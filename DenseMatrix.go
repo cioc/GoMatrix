@@ -82,4 +82,25 @@ func (d *DenseMatrix) RowAdd(row int, vals []float64) {
   }
 }
 
+//Equality
+func (d *DenseMatrix) Equals(m *DenseMatrix) (bool) {
+  mRows, mCols := m.Size()
+  if (d.rows == mRows && d.cols == mCols) {
+    for i := 0; i < d.rows; i++ {
+      for j := 0; j < d.cols; j++ {
+        if (d.vals[(d.cols *i) + j] != m.Get(i,j)) {
+          return false
+        }
+      }
+    }
+    return true
+  }
+  return false
+}
+
 //Arithmetic
+
+/*
+func Add(m1 *DenseMatrix, m2 *DenseMatrix) (DenseMatrix) {
+}
+*/
