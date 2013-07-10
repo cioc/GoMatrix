@@ -1,5 +1,9 @@
 package matrix
 
+import (
+  "errors"
+)
+
 type DenseMatrix struct {
   rows int
   cols int
@@ -109,8 +113,15 @@ func (d *DenseMatrix) Equals(m *DenseMatrix) (bool) {
 //Arithmetic
 func Add(m1 *DenseMatrix, m2 *DenseMatrix) (*DenseMatrix, error) {
   if (SameSize(m1,m2)) {
-    return nil, nil
+    rows, cols := m1.Size()
+    o := NewDenseMatrix(rows, cols)
+    for i := 0; i < rows; i++ {
+      for j := 0; j < cols; j++ {
+        o.Set(i, j, m1.Get(i,j) + m2.Get(i,j))
+      }
+    }
+    return o, nil
   }
-  return nil, nil
+  return nil, errors.New("Matrices must be same size for addition")
 }
 
