@@ -83,9 +83,17 @@ func (d *DenseMatrix) RowAdd(row int, vals []float64) {
 }
 
 //Equality
+func SameSize(m1 *DenseMatrix, m2 *DenseMatrix) (bool) {
+  m1Rows, m1Cols := m1.Size()
+  m2Rows, m2Cols := m2.Size()
+  if (m1Rows == m2Rows && m1Cols == m2Cols) {
+    return true
+  }
+  return false
+}
+
 func (d *DenseMatrix) Equals(m *DenseMatrix) (bool) {
-  mRows, mCols := m.Size()
-  if (d.rows == mRows && d.cols == mCols) {
+  if (SameSize(d, m)) {
     for i := 0; i < d.rows; i++ {
       for j := 0; j < d.cols; j++ {
         if (d.vals[(d.cols *i) + j] != m.Get(i,j)) {
@@ -99,8 +107,10 @@ func (d *DenseMatrix) Equals(m *DenseMatrix) (bool) {
 }
 
 //Arithmetic
-
-/*
-func Add(m1 *DenseMatrix, m2 *DenseMatrix) (DenseMatrix) {
+func Add(m1 *DenseMatrix, m2 *DenseMatrix) (*DenseMatrix, error) {
+  if (SameSize(m1,m2)) {
+    return nil, nil
+  }
+  return nil, nil
 }
-*/
+
