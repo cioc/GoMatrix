@@ -1,4 +1,4 @@
-package Matrix
+package matrix
 
 type DenseMatrix struct {
   rows int
