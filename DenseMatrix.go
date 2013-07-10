@@ -1,5 +1,4 @@
-package linearRegression
-
+package Matrix
 
 type DenseMatrix struct {
   rows int
@@ -82,3 +81,5 @@ func (d *DenseMatrix) RowAdd(row int, vals []float64) {
     d.vals[(d.cols * row) + i] += vals[i]
   }
 }
+
+//Arithmetic
