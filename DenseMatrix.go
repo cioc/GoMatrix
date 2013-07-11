@@ -132,13 +132,7 @@ func Multiply(m1 *DenseMatrix, m2 *DenseMatrix) (*DenseMatrix, error) {
     o := NewDenseMatrix(m1Rows, m2Cols)
     for i:= 0; i < m1Rows; i++ {
       for j := 0; j < m2Cols; j++ {
-        r := m1.GetRow(i)
-        c := m2.GetCol(j)
-        v := float64(0)
-        for z := 0; z < m1Cols; z++ {
-          v += r[z] * c[z]
-        }
-        o.Set(i, j, v)
+        o.Set(i, j, dot(Vector(m1.GetRow(i)),Vector(m2.GetCol(j))))
       }
     }
   }
