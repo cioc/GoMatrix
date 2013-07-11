@@ -125,3 +125,23 @@ func Add(m1 *DenseMatrix, m2 *DenseMatrix) (*DenseMatrix, error) {
   return nil, errors.New("Matrices must be same size for addition")
 }
 
+func Multiply(m1 *DenseMatrix, m2 *DenseMatrix) (*DenseMatrix, error) {
+  m1Rows,m1Cols := m1.Size()
+  m2Rows,m2Cols := m2.Size()
+  if (m1Cols == m2Rows) {
+    o := NewDenseMatrix(m1Rows, m2Cols)
+    for i:= 0; i < m1Rows; i++ {
+      for j := 0; j < m2Cols; j++ {
+        r := m1.GetRow(i)
+        c := m2.GetCol(j)
+        v := float64(0)
+        for z := 0; z < m1Cols; z++ {
+          v += r[z] * c[z]
+        }
+        o.Set(i, j, v)
+      }
+    }
+  }
+  return nil, errors.New("|m1 Columns| must equal |m2 Rows| for multiplication")
+}
+
